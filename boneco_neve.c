@@ -85,7 +85,6 @@ void RenderScene(void){
 	glTranslatef(0.0f, -1.0f, -5.0f); // faz uma translação na matriz de modelos
 	glRotatef(ROTACAO_Y, 0.0f, 1.0f, 0.0f);  // faz uma rotação na matriz de modelos
     glRotatef(ROTACAO_X, 1.0f, 0.0f, 0.0f);
-    // essas operações só se aplicam aos modelos existentes, I guess
 
 	// Desenha o objeto
 	pObj = gluNewQuadric();  
@@ -94,7 +93,7 @@ void RenderScene(void){
 	// Base
     glColor3f(1.0f, 1.0f, 1.0f);  
 	glPushMatrix();
-		glTranslatef(0.0f,0.0f,0.0f); // posiciona a esfera do corpo abaixo de todas (na origem)
+		glTranslatef(0.0f,0.0f,0.0f); // posiciona abaixo
 		gluSphere(pObj, 0.48f, 26,13); // maior esfera
 	glPopMatrix();
 
@@ -108,31 +107,31 @@ void RenderScene(void){
 	// Corpo
     glColor3f(1.0f, 1.0f, 1.0f);
 	glPushMatrix();
-		glTranslatef(0.0f,0.5f,0.0f); // posiciona a esfera em y = 0.5, portanto abaixo da cabeça, mas acima da base
-		gluSphere(pObj, 0.36f, 26,13); // (cria uma esfera maior que a da cabeça)
+		glTranslatef(0.0f,0.5f,0.0f); // posiciona em cima da base
+		gluSphere(pObj, 0.36f, 26,13); // cria esfera media
 	glPopMatrix();
 
     // Botão Corpo 
     glColor3f(0.0f, 0.0f, 0.0f);  
     glPushMatrix();
 		glTranslatef(0.0f,0.6f,0.36f);
-		gluSphere(pObj, 0.025f, 26,13); // (cria a maior esfera)
+		gluSphere(pObj, 0.025f, 26,13); 
 	glPopMatrix();
 
     // Braços
     // Braço Esquerdo
     glColor3f(0.588f, 0.23f, 0.09f);
     glPushMatrix();
-        glTranslatef(-0.30f,0.6f,0.0f); // posiciona o braço na altura do corpo, a esquerda dele
-        glRotatef(-90, -0.30f, 0.6f, 0.0f); // rotaciona o cilindro pra apontar para esquerda
+        glTranslatef(-0.30f,0.6f,0.0f); // posiciona o braço na altura do corpo
+        glRotatef(-90, -0.30f, 0.6f, 0.0f); // rotaciona o braço
         gluCylinder(pObj, 0.04f, 0.01f, 0.40f, 26, 13);
     glPopMatrix();
 
     // Braços
     // Braço Direito
     glPushMatrix();
-        glTranslatef(0.30f,0.6f,0.0f); // posiciona o braço na altura do corpo, a esquerda dele
-        glRotatef(90, 0.30f, 0.6f, 0.0f); // rotaciona o cilindro pra apontar para esquerda
+        glTranslatef(0.30f,0.6f,0.0f); // posiciona o braço na altura do corpo
+        glRotatef(90, 0.30f, 0.6f, 0.0f); // rotaciona o braço
         gluCylinder(pObj, 0.04f, 0.01f, 0.40f, 26, 13);
     glPopMatrix();
 
@@ -142,43 +141,37 @@ void RenderScene(void){
     glColor3f(1.0f, 1.0f, 1.0f);
 	glPushMatrix(); // save transform matrix state
 		glTranslatef(0.0f, 1.0f, 0.0f); // rotaciona a matriz de modelos
-		gluSphere(pObj, 0.24f, 26, 13); // cria uma esfera com raio .24, 
-        //                                 26 linhas de longitude e 13 de latitude 
-        //                                              (cima/baixo)      (esq/dir)
-        // todas as transformações anteriores são aplicadas nessa esfera
-	glPopMatrix(); // restaura a matriz, portanto garantindo que as transformações feitas só sejam
-    // aplicadas na esfera que criou
+		gluSphere(pObj, 0.24f, 26, 13); // cria a menor esfera
+	glPopMatrix(); 
 
     // Nariz 
-	// define a cor da matriz como laranja (não altera a cor dos objetos que já existem)
 	glColor3f(1.0f, 0.4f, 0.51f);  
 	glPushMatrix();
-		glTranslatef(0.0f, 1.0f, 0.2f); // 0.2f no z faz com que o cone apareça em frente a esfera da cabeça
-		gluCylinder(pObj, 0.04f, 0.0f, 0.3f, 26, 13); // cria um cilindro com 0.04 raio de base
-        //  0 raio de topo (portanto gera um cone) 0.3 altura 26 linhas de longitude e 13 de latitude         
+		glTranslatef(0.0f, 1.0f, 0.2f); //posiciona nariz
+		gluCylinder(pObj, 0.04f, 0.0f, 0.3f, 26, 13); // cria um cilindro
+      
 	glPopMatrix();  
 
-	// Olhos
     // Olho Direito
     glColor3f(0.0f,0.0f,0.0f);
     glPushMatrix();
-        glTranslatef(0.1f,1.1f,0.2f); // criar duas esferas e posicionar deslocado do centro da cabeça
-        gluSphere(pObj, 0.025f, 26, 13); // cria uma pequena esfera
+        glTranslatef(0.1f,1.1f,0.2f); // criar esfera e posiciona deslocado do centro da cabeça
+        gluSphere(pObj, 0.025f, 26, 13); // cria olho
     glPopMatrix();
     
     // Olho esquerdo
     glColor3f(0.0f,0.0f,0.0f);
     glPushMatrix();
-        glTranslatef(-0.1f,1.1f,0.2f); // criar duas esferas e posicionar deslocado do centro da cabeça
-        gluSphere(pObj, 0.025f, 26, 13); // cria uma pequena esfera
+        glTranslatef(-0.1f,1.1f,0.2f); // criar esfera e posiciona deslocado do centro da cabeça
+        gluSphere(pObj, 0.025f, 26, 13); // cria olho
     glPopMatrix();
 
-    // Borda Chapéu
+    // aba Chapéu
     glPushMatrix();
-        glTranslatef(0.0f,1.24f,0.0f); // posiciona a borda acima da cabeça
-        glRotatef(90,1,0,0);             // rotaciona a borda
+        glTranslatef(0.0f,1.24f,0.0f); // posiciona a aba acima da cabeça
+        glRotatef(90,1,0,0);             // rotaciona a aba
         glTranslatef(0.0f, 0.0f, 0.05f); // para que ela esteja orientada no eixo y
-        gluDisk(pObj, 0.0f, .36f, 26, 13); // cria um disco de raio .36
+        gluDisk(pObj, 0.0f, .36f, 26, 13); // cria um disco
     glPopMatrix();
 
 	// Chapéu
@@ -186,14 +179,14 @@ void RenderScene(void){
         glTranslatef(0.0f,1.24f,0.0f); // posiciona
         glRotatef(90,1,0,0);              // rotaciona o chapéu 
         glTranslatef(0.0f, 0.0f, -0.45f); // para que ele esteja orientado no eixo y
-        gluCylinder(pObj, 0.25f, 0.25f, 0.5f, 26,13); // cria um cilindro de raio .25 e altura .5
+        gluCylinder(pObj, 0.25f, 0.25f, 0.5f, 26,13); // cria um cilindro
     glPopMatrix();
     //staff
-        glColor3f(0.588f, 0.23f, 0.09f);
+        glColor3f(0.588f, 0.23f, 0.09f); //cor
     glPushMatrix();
-        glTranslatef(-0.7f,-0.3f,0.0f); 
-        glRotatef(-90, 9.30f, 0.0f, 0.0f); // rotaciona o cilindro pra apontar para esquerda
-        gluCylinder(pObj, 0.04f, 0.01f, 1.40f, 26, 13);
+        glTranslatef(-0.7f,-0.3f,0.0f); //posiciona
+        glRotatef(-90, 9.30f, 0.0f, 0.0f); //rotaciona
+        gluCylinder(pObj, 0.04f, 0.01f, 1.40f, 26, 13); //cria cilindro
     glPopMatrix();
 
     // Restore the matrix state  

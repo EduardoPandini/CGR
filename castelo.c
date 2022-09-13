@@ -4,20 +4,8 @@
 
 static GLfloat ROTACAO_Y = 0.0f;
 static GLfloat ROTACAO_X = 0.0f;
-
 float coordenadaX = 0.9f;
 float coordenadaZ = 1.5f;
-
-/*
-    torres
-
-    1---2
-    |-3-|
-    4-5-6
-    ^^^^^ 
-    frente
-*/
-
 
 void ChangeSize(int comprimento, int altura){  
     GLfloat fAspect;  
@@ -116,21 +104,17 @@ void RenderScene(void){
 	ObjetoPrincipal = gluNewQuadric();  
 	gluQuadricNormals(ObjetoPrincipal, GLU_SMOOTH);  
     glColor3f(1.0f, 1.0f, 1.0f);
-    // desenharei da esquerda pra direita
-    // assumindo que a torre de trás da parede, que está no fundo e tem um telhado não cônico, está na posição 0,0
 
     // chao
     glColor3f(0.6f,1.0f,0.6f);
     glPushMatrix();
         glTranslatef(0.0f, 0.125f, -4.0f); 
         glRotatef(90, 0.0f, 0.0f, 1.0f);
-        //glTranslatef(0.10f,0.22f,-0.75f); // -0.5 pois agora essa retângulo está de cabeiça p/ baixo
         gluCylinder(ObjetoPrincipal, 2.0f, 2.0f, 5.0f, 2, 1);
     glPopMatrix();
     
 
     // Torre esquerda, fundo 
-    glColor3f(0.5f,0.5f,0.5f);
     glColor3f(0.5f,0.5f,0.5f);
     glPushMatrix();
         glTranslatef(-1.0, 0.625f, -1.5);
@@ -152,12 +136,10 @@ void RenderScene(void){
     glColor3f(0.5f,0.5f,0.5f);
     glPushMatrix();
         glTranslatef(-1.0f, 0.28f, -1.5f); 
-        //glRotatef(-180, 1, 0, -0.30f);
-        //glTranslatef(0.10f,0.22f,-0.75f); // -0.5 pois agora essa retângulo está de cabeiça p/ baixo
         gluCylinder(ObjetoPrincipal, 0.175f, 0.175f, 1.5f, 2, 1);
     glPopMatrix();
 
-    // Torre esquerda, fundo 
+    // Torre direita, fundo 
     glColor3f(0.5f,0.5f,0.5f);
     glPushMatrix();
         glTranslatef(1.0, 0.625f, -1.5);
@@ -174,12 +156,11 @@ void RenderScene(void){
             glTranslatef(0.0f, 0.0f, 0.0f); // para que esteja orientado no eixo y
             gluCylinder(ObjetoPrincipal, 0.18f, 0.0f, 0.35f, 30, 15);
         glPopMatrix();
+
     // Parede entre torre esquerda atras e torre esquerda frente
     glColor3f(0.5f,0.5f,0.5f);
     glPushMatrix();
         glTranslatef(1.0f, 0.28f, -1.5f); 
-        //glRotatef(-180, 1, 0, -0.30f);
-        //glTranslatef(0.10f,0.22f,-0.75f); // -0.5 pois agora essa retângulo está de cabeiça p/ baixo
         gluCylinder(ObjetoPrincipal, 0.175f, 0.175f, 1.5f, 2, 1);
     glPopMatrix();
 
@@ -188,11 +169,10 @@ void RenderScene(void){
     glPushMatrix();
         glTranslatef(-1.0f, 0.28f, -1.5f); 
         glRotatef(90, 0, 1, 0);
-        //glTranslatef(0.10f,0.22f,-0.75f); // -0.5 pois agora essa retângulo está de cabeiça p/ baixo
         gluCylinder(ObjetoPrincipal, 0.175f, 0.175f, 2.0f, 2, 1);
     glPopMatrix();
 
-    // Torre centro-esquerda
+    // Torre frente esquerda
     glColor3f(0.5f,0.5f,0.5f);
     glPushMatrix();
         glTranslatef(-1.0f, 0.625f, 0.0f);
@@ -210,7 +190,7 @@ void RenderScene(void){
             gluCylinder(ObjetoPrincipal, 0.18f, 0.0f, 0.35f, 30, 15);
         glPopMatrix();
 
-    // Parede entre torre centro-esquerda e gate house e torre direita
+    // Parede entre torre frente esquerda e porta e torre frente direita
     glColor3f(0.5f,0.5f,0.5f);
     glPushMatrix();
         glTranslatef(-0.0f, 0.125f, -0.0f); 
@@ -221,24 +201,6 @@ void RenderScene(void){
     glPopMatrix();
 
 
-
-    // torre do meio
-    glColor3f(0.5f,0.5f,0.5f);
-    glPushMatrix();
-        glTranslatef(-1.0f, 1.0f, -0.75f);
-        glRotatef(90,1,0,0);
-        glTranslatef(1.0f, 0.0f, 0.0f);
-        gluCylinder(ObjetoPrincipal, 0.15f, 0.15f, 0.85f, 4, 2);
-    glPopMatrix();
-
-        // Telhado da Torre atrás da porta
-        glColor3f(0.7f,0.4f,0.4f);
-        glPushMatrix();
-            glTranslatef(0.0f,1.0f,-0.75f);
-            glRotatef(90,1,0,1);
-            glutSolidCube(0.20f);
-
-        glPopMatrix();
 
     // porta
     // torre 5
@@ -279,22 +241,7 @@ void RenderScene(void){
             gluCylinder(ObjetoPrincipal, 0.18f, 0.0f, 0.35f, 30, 15);
         glPopMatrix();
 
-        // laje do telhado da torre   
-             
-        glPushMatrix();
-            glColor3f(0.7f,0.4f,0.4f);
-            glTranslatef(0.0f, 1.0f, -0.75f); 
-            glRotatef(90, 0.0f, 0.0f, 1.0f);
-            glRotatef(45, 1.0f, 0.0f, 0.0f);
-            glTranslatef(0.0f, 0.0f, -0.11f); 
-            gluCylinder(ObjetoPrincipal, 0.11f, 0.11f, 0.22f, 2, 1);
-        glPopMatrix();
-        
 
-
-// gluCylinder(pObj, RaioBase, RaioTopo, Altura, Lat, Long);
-// glRect(x1, y1, x2, y2)
-         
     // Restore the matrix state  
     glPopMatrix();  
     // Buffer swap  

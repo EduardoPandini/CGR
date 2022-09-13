@@ -11,9 +11,6 @@ castelo2: ${LINKFLAGS}
 
 robo: ${LINKFLAGS}
 
-# run_all: Arrumar para compilar todos os arquivos de uma vez
-# 	./all $(ARGS)
-
 run_boneco: boneco
 	./boneco_neve $(ARGS)
 
